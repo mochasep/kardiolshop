@@ -35,6 +35,7 @@ class Item extends Model
         $sent = 0;
         for ($i = count($friends) / 150; $i >= 0; $i--) {
             $temp = Linefriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get();
+            if (count($temp) == 0) return;
             $sent += count($temp);
             $ids = array_map(function ($user) {
                 return $user->friend_id;

@@ -15,9 +15,11 @@ class LineController extends Controller
         $data = json_decode($request->getContent());
         $type = $data->type;
         if ($type == "follow") {
-            $friend = Linefriend::firstOrNew(array('friend_id' => $data->events[0]->source->userId));
-            $friend->friend_id = $data->events[0]->source->userId;
-            $friend->save();
+            $chat_id = $data->events[0]->source->userId;
+            $this->sendItemInfo($chat_id, 1);
+//            $friend = Linefriend::firstOrNew(array('friend_id' => $data->events[0]->source->userId));
+//            $friend->friend_id = $data->events[0]->source->userId;
+//            $friend->save();
         } else {
             $chat_id = $data->events[0]->source->userId;
             $text = $data->events[0]->message->text;

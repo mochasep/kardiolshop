@@ -17,8 +17,6 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->bigInteger('price');
-            $table->string('link_tokopedia');
-            $table->string('link_bukalapak');
             $table->string('image');
             $table->timestamps();
         });

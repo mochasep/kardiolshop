@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 use App\Item;
+use Psy\Exception\ErrorException;
 
 class LineController extends Controller
 {
@@ -14,10 +15,11 @@ class LineController extends Controller
     {
         $data = json_decode($request->getContent());
         $type = $data->events[0]->type;
+
         if ($type == "follow") {
             $chat_id = $data->events[0]->source->userId;
             $this->sendItemInfo($chat_id, 1);
-            $friend = Linefriend::firstOrCreate(['friend_id' => (string) $data->events[0]->source->userId]);
+            $friend = Linefriend::firstOrCreate(['friend_id' => $chat_id]);
 //            $friend->friend_id = $data->events[0]->source->userId;
 //            $friend->save();
             $chat_id = $data->events[0]->source->userId;

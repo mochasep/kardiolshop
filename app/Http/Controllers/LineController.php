@@ -18,6 +18,8 @@ class LineController extends Controller
             $friend = Linefriend::firstOrNew(array('friend_id' => $data->events[0]->source->userId));
             $friend->friend_id = $data->events[0]->source->userId;
             $friend->save();
+            $chat_id = $data->events[0]->source->userId;
+            $this->sendItemInfo($chat_id, 1);
         } else {
             $chat_id = $data->events[0]->source->userId;
             $text = $data->events[0]->message->text;

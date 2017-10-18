@@ -6,6 +6,13 @@
     <script src="../js/jquery-3.2.1.slim.min.js"></script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+
+    <meta property="og:url"
+          content="http://kardi-test.herokuapp.com/product/{{ $item->id }}"/>
+    <meta property="og:title" content="{{ $item->name }}"/>
+    <meta property="og:description" content="{{ $item->description }}"/>
+    <meta property="og:image"
+          content="{{ asset('items/'.$item->image) }}"/>
 </head>
 
 <body>

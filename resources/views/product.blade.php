@@ -9,6 +9,8 @@
 </head>
 
 <body>
+@include('modals.line')
+@include('modals.telegram')
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-3">{{ $item->name }}</h1>

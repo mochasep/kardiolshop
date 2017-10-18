@@ -82,5 +82,15 @@ Route::get('/item.delete/{id}', function (Request $request, $id) {
     return redirect('/');
 });
 
+Route::get('/product/{id}', function ($id) {
+    $item = Item::findOrFail($id);
+
+    return view('product', [
+        'title' => 'Kardi Online Shop - ' . $item->name,
+        'id' => $id,
+        'item' => $item,
+    ]);
+});
+
 Route::post('/telegram', "TelegramController@webHook");
 Route::post('/line', "LineController@webHook");

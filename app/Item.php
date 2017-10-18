@@ -2,13 +2,24 @@
 
 namespace App;
 
+use Facebook\Facebook;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
     public function publishToFacebook($request)
     {
-
+        $data = array(
+            'link' => "https://kardi-test.herokuapp.com/product/$this->id",
+            'message' => "New item!"
+        );
+        $fb = new Facebook([
+            'app_id' => config('facebook.config.app_id'),
+            'app_secret' => config('facebook.config.app_secret'),
+            'default_graph_version' => config('facebook.config.default_graph_version')
+        ]);
+        $pageAccessToken = config('facebook.config.page_access_token');
+        $fb->post('/1949768102013883/feed', $data, $pageAccessToken);
     }
 
     public function publishToLine($request)

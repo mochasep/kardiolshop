@@ -18,12 +18,7 @@ class LineController extends Controller
 
         if ($type == "follow") {
             $chat_id = $data->events[0]->source->userId;
-            $this->sendItemInfo($chat_id, 1);
             $friend = Linefriend::firstOrCreate(['friend_id' => $chat_id]);
-//            $friend->friend_id = $data->events[0]->source->userId;
-//            $friend->save();
-            $chat_id = $data->events[0]->source->userId;
-            $this->sendItemInfo($chat_id, 1);
         } else {
             $chat_id = $data->events[0]->source->userId;
             $text = $data->events[0]->message->text;

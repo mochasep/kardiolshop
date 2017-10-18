@@ -26,13 +26,14 @@ class Item extends Model
         $friends = Linefriend::orderBy('created_at', 'asc')->get();
         $sent = 0;
         for ($i = count($friends) / 150; $i >= 0; $i--) {
-            $temp = Linefriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get();
+            $temp = Linefriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get()->all();
             if (count($temp) == 0) return;
             $sent += count($temp);
-            var_dump($temp->all()[0]->friend_id);
+//            var_dump($temp[0]->friend_id);
             $ids = array_map(function ($user) {
                 return $user->friend_id;
             }, $temp);
+            var_dump($ids);
         }
 
     }
@@ -68,7 +69,7 @@ class Item extends Model
 
             $json = str_replace("\\\\n", "\\n", json_encode($data));
 
-            $curl = curl_init("https://api.line.me/v2/bot/message/push");
+            $curl = curl_init("https://api.line.me/v2/bot/message/multicast");
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

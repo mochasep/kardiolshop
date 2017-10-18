@@ -13,7 +13,7 @@ class LineController extends Controller
     public function webHook(Request $request)
     {
         $data = json_decode($request->getContent());
-        $type = $data->type;
+//        $type = $data->type;
 //        if ($type == "follow") {
 //            $chat_id = $data->events[0]->source->userId;
 //            $this->sendItemInfo($chat_id, 1);

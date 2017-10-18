@@ -62,7 +62,7 @@ class Item extends Model
                 'messages' => array(
                     array(
                         'type' => 'text',
-                        'text' => 'Name: ' . $this->name . '\nDescription: ' . $this->description . '\nPrice: ' . $this->price,
+                        'text' => 'Id: ' . $this->id . '\nName: ' . $this->name . '\nDescription: ' . $this->description . '\nPrice: ' . $this->price,
                     )
                 )
             );
@@ -88,7 +88,7 @@ class Item extends Model
         foreach ($friends as $friend) {
             $data = array(
                 'chat_id' => $friend->friend_id,
-                'text' => $this->name . '\n' . $this->description,
+                'text' => 'Id: ' . $this->id . '\nName: ' . $this->name . '\nDescription: ' . $this->description . '\nPrice: ' . $this->price,
             );
 
             $json = str_replace("\\\\n", "\\n", json_encode($data));

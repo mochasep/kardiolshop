@@ -67,11 +67,9 @@ Route::post('/item', function (Request $request) {
     $request->item_image->move(public_path('items'), $item->image);
     $item->save();
 
-    $item->publishToBukalapak($request);
     $item->publishToFacebook($request);
     $item->publishToLine($request);
     $item->publishToTelegram($request);
-    $item->publishToTokopedia($request);
 
     return redirect('/admin');
 });
@@ -83,3 +81,6 @@ Route::get('/item.delete/{id}', function (Request $request, $id) {
 
     return redirect('/');
 });
+
+Route::post('/telegram', "TelegramController@webHook");
+Route::post('/line', "LineController@webHook");

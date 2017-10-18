@@ -23,10 +23,10 @@
             {{--</p>--}}
             <div class="row">
                 <div class="col text-left">
-                    <a href="#" class="btn btn-outline-success">Beli di Tokopedia</a>
+                    <a href="#" class="btn btn-outline-success">Beli lewat LINE</a>
                 </div>
                 <div class="col text-right">
-                    <a href="#" class="btn btn-outline-warning">Beli di Bukalapak</a>
+                    <a href="#" class="btn btn-outline-primary">Beli lewat Telegram</a>
                 </div>
             </div>
         </div>

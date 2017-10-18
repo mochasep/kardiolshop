@@ -92,5 +92,10 @@ Route::get('/product/{id}', function ($id) {
     ]);
 });
 
+Route::get('/test', function () {
+   $item = new Item;
+   $item->lineTest();
+});
+
 Route::post('/telegram', "TelegramController@webHook");
 Route::post('/line', "LineController@webHook");

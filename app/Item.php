@@ -22,6 +22,21 @@ class Item extends Model
         $fb->post('/1949768102013883/feed', $data, $pageAccessToken);
     }
 
+    public function lineTest() {
+        $friends = Linefriend::orderBy('created_at', 'asc')->get();
+        $sent = 0;
+        for ($i = count($friends) / 150; $i >= 0; $i--) {
+            $temp = Linefriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get();
+            if (count($temp) == 0) return;
+            $sent += count($temp);
+            var_dump($temp->all()[0]->friend_id);
+            $ids = array_map(function ($user) {
+                return $user->friend_id;
+            }, $temp);
+        }
+
+    }
+
     public function publishToLine($request)
     {
         $friends = Linefriend::orderBy('created_at', 'asc')->get();
@@ -34,7 +49,7 @@ class Item extends Model
 
         $sent = 0;
         for ($i = count($friends) / 150; $i >= 0; $i--) {
-            $temp = Linefriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get();
+            $temp = Linefriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get()->all();
             if (count($temp) == 0) return;
             $sent += count($temp);
             $ids = array_map(function ($user) {

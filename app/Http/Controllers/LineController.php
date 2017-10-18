@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\LineFriend;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -12,27 +13,34 @@ class LineController extends Controller
     public function webHook(Request $request)
     {
         $data = json_decode($request->getContent());
-        $chat_id = $data->events[0]->source->userId;
-        $text = $data->events[0]->message->text;
+        $type = $data->type;
+        if ($type == "follow") {
+            $friend = LineFriend::firstOrNew(array('friend_id' => $data->events[0]->source->userId));
+            $friend->friend_id = $data->events[0]->source->userId;
+            $friend->save();
+        } else {
+            $chat_id = $data->events[0]->source->userId;
+            $text = $data->events[0]->message->text;
 
-        $parts = explode("_", $text);
-        var_dump($parts);
-        if (count($parts) > 0) {
-            if ($parts[0] == "BELI" && count($parts) == 2) {
-                $this->sendOrderInfo($chat_id, $parts[1]);
-            } else if ($parts[0] == "LIHAT" && count($parts) == 2) {
-                $this->sendItemInfo($chat_id, $parts[1]);
-            } else {
-                $error_data = array(
-                    'to' => $chat_id,
-                    'messages' => array(
-                        array(
-                            'type' => 'text',
-                            'text' => "Perintah tidak valid. Perintah yang valid adalah LIHAT_<ID_BARANG> atau BELI_<ID_BARANG>",
-                        )
-                    ),
-                );
-                $this->sendMessage($error_data);
+            $parts = explode("_", $text);
+            var_dump($parts);
+            if (count($parts) > 0) {
+                if ($parts[0] == "BELI" && count($parts) == 2) {
+                    $this->sendOrderInfo($chat_id, $parts[1]);
+                } else if ($parts[0] == "LIHAT" && count($parts) == 2) {
+                    $this->sendItemInfo($chat_id, $parts[1]);
+                } else {
+                    $error_data = array(
+                        'to' => $chat_id,
+                        'messages' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => "Perintah tidak valid. Perintah yang valid adalah LIHAT_<ID_BARANG> atau BELI_<ID_BARANG>",
+                            )
+                        ),
+                    );
+                    $this->sendMessage($error_data);
+                }
             }
         }
     }

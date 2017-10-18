@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\LineFriend;
+use App\Linefriend;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class LineController extends Controller
         $data = json_decode($request->getContent());
         $type = $data->type;
         if ($type == "follow") {
-            $friend = LineFriend::firstOrNew(array('friend_id' => $data->events[0]->source->userId));
+            $friend = Linefriend::firstOrNew(array('friend_id' => $data->events[0]->source->userId));
             $friend->friend_id = $data->events[0]->source->userId;
             $friend->save();
         } else {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\TelegramFriend;
+use App\Telegramfriend;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class TelegramController extends Controller
     {
         $data = json_decode($request->getContent());
 
-        $friend = TelegramFriend::firstOrNew(array('friend_id' => $data->message->chat->id));
+        $friend = Telegramfriend::firstOrNew(array('friend_id' => $data->message->chat->id));
         $friend->friend_id = $data->message->chat->id;
         $friend->save();
 

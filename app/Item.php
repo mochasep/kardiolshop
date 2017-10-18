@@ -4,8 +4,8 @@ namespace App;
 
 use Facebook\Facebook;
 use Illuminate\Database\Eloquent\Model;
-use App\LineFriend;
-use App\TelegramFriend;
+use App\Linefriend;
+use App\Telegramfriend;
 
 class Item extends Model
 {
@@ -26,7 +26,7 @@ class Item extends Model
 
     public function publishToLine($request)
     {
-        $friends = LineFriend::orderBy('created_at', 'asc')->get();
+        $friends = Linefriend::orderBy('created_at', 'asc')->get();
 
         $header = array(
             'Content-Type: application/json',
@@ -36,7 +36,7 @@ class Item extends Model
 
         $sent = 0;
         for ($i = count($friends) / 150; $i >= 0; $i--) {
-            $temp = LineFriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get();
+            $temp = Linefriend::orderBy('created_at', 'asc')->skip($sent)->take(150)->get();
             $sent += count($temp);
             $ids = array_map(function ($user) {
                 return $user->friend_id;
@@ -69,7 +69,7 @@ class Item extends Model
             'Content-Type: application/json',
         );
 
-        $friends = TelegramFriend::orderBy('created_at', 'asc')->get();
+        $friends = Telegramfriend::orderBy('created_at', 'asc')->get();
         foreach ($friends as $friend) {
             $data = array(
                 'chat_id' => $friend->friend_id,

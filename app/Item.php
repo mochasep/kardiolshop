@@ -4,8 +4,6 @@ namespace App;
 
 use Facebook\Facebook;
 use Illuminate\Database\Eloquent\Model;
-use App\Linefriend;
-use App\Telegramfriend;
 
 class Item extends Model
 {

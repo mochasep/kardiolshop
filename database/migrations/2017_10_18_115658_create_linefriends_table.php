@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLinefriendTable extends Migration
+class CreateLinefriendsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,6 @@ class CreateLinefriendTable extends Migration
     {
         Schema::create('linefriends', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('friend_id');
             $table->timestamps();
         });
     }

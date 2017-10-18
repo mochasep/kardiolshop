@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTelegramfriendTable extends Migration
+class CreateTelegramfriendsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,6 @@ class CreateTelegramfriendTable extends Migration
     {
         Schema::create('telegramfriends', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('friend_id');
             $table->timestamps();
         });
     }

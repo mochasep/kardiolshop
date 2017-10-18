@@ -2,6 +2,9 @@
 /node_modules
 Homestead.yaml
 Homestead.json
+.env
+
+/public/items
 
 
 # Created by https://www.gitignore.io/api/vim,notepadpp,sublimetext,intellij+all,visualstudiocode

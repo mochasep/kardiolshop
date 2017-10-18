@@ -1,3 +1,6 @@
+@include('modals.line')
+@include('modals.telegram')
+
 <div class="col-4" style="margin-bottom: 32px;">
     <div class="card">
         @if (Session::has('login'))
@@ -12,7 +15,6 @@
             <p class="card-text text-justify">
                 {{ $item->description }}
             </p>
-            {{--<p class="card-text text-right">--}}
             <div class="text-right">
                 <h3>
                 <span class="badge badge-success">
@@ -20,13 +22,12 @@
                 </span>
                 </h3>
             </div>
-            {{--</p>--}}
             <div class="row">
                 <div class="col text-left">
-                    <a href="#" class="btn btn-outline-success">Beli lewat LINE</a>
+                    <button class="btn btn-outline-success" data-toggle="modal" data-target="#lineModal" data-itemid="{{ $item->id }}">Beli lewat LINE</button>
                 </div>
                 <div class="col text-right">
-                    <a href="#" class="btn btn-outline-primary">Beli lewat Telegram</a>
+                    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#telegramModal" data-itemid="{{ $item->id }}">Beli lewat Telegram</button>
                 </div>
             </div>
         </div>

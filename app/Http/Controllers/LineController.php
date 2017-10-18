@@ -15,9 +15,9 @@ class LineController extends Controller
         $data = json_decode($request->getContent());
         $type = $data->events[0]->type;
         if ($type == "follow") {
-            $friend = Linefriend::firstOrCreate(['friend_id' => (string) $data->events[0]->source->userId]);
-//            $friend->friend_id = $data->events[0]->source->userId;
-//            $friend->save();
+            $friend = Linefriend::firstOrNew(['friend_id' => (string) $data->events[0]->source->userId]);
+            $friend->friend_id = $data->events[0]->source->userId;
+            $friend->save();
             $chat_id = $data->events[0]->source->userId;
             $this->sendItemInfo($chat_id, 1);
         } else {
@@ -68,6 +68,19 @@ class LineController extends Controller
             $data['messages'][0]['text'] = "Maaf, barang tidak ditemukan.";
             $this->sendMessage($data);
         }
+    }
+
+    private function sendTest($chat_id, $message) {
+        $data = array(
+            'to' => $chat_id,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $message,
+                )
+            )
+        );
+        $this->sendMessage($data);
     }
 
     private function sendOrderInfo($chat_id, $item_id)

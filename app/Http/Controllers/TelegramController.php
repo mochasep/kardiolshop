@@ -14,7 +14,7 @@ class TelegramController extends Controller
     {
         $data = json_decode($request->getContent());
 
-        $friend = Telegramfriend::firstOrNew(array('friend_id' => $data->message->chat->id));
+        $friend = Telegramfriend::firstOrNew(['friend_id' => $data->message->chat->id]);
         $friend->friend_id = $data->message->chat->id;
         $friend->save();
 

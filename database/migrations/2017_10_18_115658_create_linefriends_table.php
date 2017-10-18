@@ -14,6 +14,7 @@ class CreateLinefriendsTable extends Migration
     {
         Schema::create('linefriends', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('friend_id');
             $table->timestamps();
         });
     }

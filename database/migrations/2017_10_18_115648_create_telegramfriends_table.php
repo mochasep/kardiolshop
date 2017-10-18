@@ -14,6 +14,7 @@ class CreateTelegramfriendsTable extends Migration
     {
         Schema::create('telegramfriends', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('friend_id');
             $table->timestamps();
         });
     }

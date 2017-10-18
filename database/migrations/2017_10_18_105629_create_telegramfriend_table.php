@@ -12,7 +12,7 @@ class CreateTelegramfriendTable extends Migration
      */
     public function up()
     {
-        Schema::create('telegramfriend', function (Blueprint $table) {
+        Schema::create('telegramfriends', function (Blueprint $table) {
             $table->increments('id');
             $table->string('friend_id');
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateTelegramfriendTable extends Migration
      */
     public function down()
     {
-        Schema::drop('telegramfriend');
+        Schema::drop('telegramfriends');
     }
 }

@@ -12,7 +12,7 @@ class CreateLinefriendTable extends Migration
      */
     public function up()
     {
-        Schema::create('linefriend', function (Blueprint $table) {
+        Schema::create('linefriends', function (Blueprint $table) {
             $table->increments('id');
             $table->string('friend_id');
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateLinefriendTable extends Migration
      */
     public function down()
     {
-        Schema::drop('linefriend');
+        Schema::drop('linefriends');
     }
 }
